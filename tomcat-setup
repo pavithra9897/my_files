@@ -1,0 +1,30 @@
+TOMCAT INSTALLATION:
+
+https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-10-on-ubuntu-20-04
+    follow the correct procedure will get tomcat :
+
+change into nginx port:
+   sudo apt-get install nginx
+   sudo systemctl start nginx
+   sudo systemctl status nginx
+   cd /etc/nginx/sites-available/
+       sudo vi nginx.conf
+
+server {
+  listen 80;
+  access_log /var/log/nginx/tomcat-access.log;
+  error_log /var/log/nginx/tomcat-error.log;
+  location / {
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://54.174.130.166:8080/;
+  }
+}
+
+
+ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled
+
+systemctl reload nginx
+systemctl status nginx
+
