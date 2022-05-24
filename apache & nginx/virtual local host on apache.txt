@@ -1,0 +1,99 @@
+LINK : https://www.cloudsigma.com/setting-up-apache-virtual-hosts-on-ubuntu-20-04/
+LINK: https://www.arubacloud.com/tutorial/how-to-configure-apache-virtual-hosts-on-ubuntu-20-04.aspx
+
+How to configure Apache Virtual Hosts on Ubuntu 20.04:
+
+Installing Apache:
+sudo apt-get update
+sudo apt install apache2
+sudo systemctl status apache2
+         Then, open your browser and connect to the IP address of your Server: hostname -I (or)	 ifconfig (or) ip a (or) ip address
+	 To remove Apache, just type:  sudo apt-get purge apache2
+
+Configuring Virtual Host on Apache2:
+sudo mkdir -p mypersonaldomain.com/html/
+sudo chmod -R 755 /var/www/mypersonaldomain.com 
+
+Create an index.html file within your domain:
+sudo nano mypersonaldomain.com/html/index.html
+<html>
+  <head>
+    <title>Welcome</title>
+  </head>
+  <body>
+    <h1>Hello, you’re connected to mypersonaldomain.com!</h1>
+  </body>
+</html>
+Save and close using the CTRL + X combination, then press Y and confirm by pressing ENTER.
+
+sudo nano /etc/apache2/sites-available/mypersonaldomain.com.conf 
+
+<VirtualHost *:80>
+   ServerAdmin admin@mypersonaldomain.com   
+  ServerName mypersonaldomain.com
+  ServerAlias www.mypersonaldomain.com
+  
+   DocumentRoot /var/www/mypersonaldomain.com/html
+  
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+Save and close using the CTRL + X combination, then press Y and confirm by pressing ENTER.
+
+ cd /etc/ 
+ sudo vim hosts 
+Then, enable the new site and disable the default Apache configuration:
+sudo a2ensite mypersonaldomain.com.conf 
+sudo apache2ctl configtest 
+sudo systemctl restart apache2 
+      ======= TYPE DNS.COM==============
+
+Creating the second Apache Virtual Host:
+sudo mkdir -p /var/www/mypersonaldomain2.com/html 
+sudo chmod -R 755 /var/www/mypersonaldomain2.com
+
+Create the index.html page: 
+nano /var/www/mypersonaldomain2.com/html/index.html
+<html>
+  <head>
+    <title>Welcome_2</title>
+  </head>
+  <body>
+    <h1>Hello, you’re connected to mypersonaldomain2.com!</h1>
+  </body>
+</html>
+sudo nano /etc/apache2/sites-available/mypersonaldomain2.com.conf
+<VirtualHost *:80>
+ServerAdmin admin@mypersonaldomain2.com
+  ServerName mypersonaldomain2.com
+  ServerAlias www.mypersonaldomain2.com
+  DocumentRoot /var/www/mypersonaldomain2.com/html
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+enable the configuration file of the second virtual host:
+sudo a2ensite mypersonaldomain2.com.conf 
+
+Check that the syntax is correct:
+sudo apache2ctl configtest 
+
+Restart Apache:
+sudo systemctl restart apache2          
+ 
+   ===== END ===== 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
