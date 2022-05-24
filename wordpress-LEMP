@@ -152,6 +152,8 @@ server {
 #       location / {
 #               try_files $uri $uri/ =404;
 #       }
+
+
    --------------------------------------------
      server {
         listen 80;
@@ -171,6 +173,8 @@ server {
         }
       }
     -------------------------------------------------------------
+
+
     server {
             listen 80;
             root /backup/wordpress;
@@ -204,6 +208,8 @@ server {
 }
 
 --------------------------------------------------------------------------
+
+
 ln -s /etc/nginx/sites-availabe/wordpress.conf /etc/nginx/sites-enabled
 cd sites-enabled  ; ls -l  ; wordpress.conf    default   ; rm -rf default
 sudo nginx -t
