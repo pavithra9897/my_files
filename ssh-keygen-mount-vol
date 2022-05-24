@@ -1,0 +1,32 @@
+ssh-keygen -t rsa -b 4096
+  password-pavi
+ cd .ssh --> id_rsa.pub & id_rsa  (public and private saved in this folder)
+   sudo vim id_rsa.pub --> copy the key
+
+open ec2 --> keypair - action - import key --- paste the public key copied from id_rsa.pub
+create ec2 instance  -- select keypair we created
+
+open ubuntu terminal -- cd .ssh/
+                     -- ssh -i "id_rsa" ubuntu@instance public ip
+
+
+
+mount volume in terminal:
+    create extra volume and attach to ec2 instance
+    in ubuntu terminal,
+             (https://devopscube.com/mount-ebs-volume-ec2-instance/)
+           sudo mkfs -t ext4 /dev/xvdf
+           sudo mkdir /newvolume
+           lsbllk -fs  (uuid created)
+           sudo vi /etc/fstab
+           sudo mount -av
+           ====================
+           sudo mount /dev/xvdf /newvolume/
+           cd /newvolume
+           df -h .
+    to mount permantely,
+           e2label /dev/xvdf "LABEL001"
+           sudo blkid --> shows label mounted
+           cd /etc/
+              sudo vim fstag
+                 LABEL=LABEL001   /newvolume    defaults  1 0  --> cretaed like this
