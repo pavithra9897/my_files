@@ -1,0 +1,23 @@
+CREATING  SSL CERTIFICATE - LET'S encrypt:
+
+https://www.rosehosting.com/blog/how-to-secure-nginx-with-lets-encrypt-on-ubuntu-20-04/
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04
+---------------------------------------------------
+*https://serverspace.io/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/
+https://dnschecker.org
+---------------------------------------------
+
+command to check dns nameserver:
+dig -t a pavi.tk
+ nslook pavi.tk
+----------------------------------------
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+
+sudo apt install letsencrypt
+sudo systemctl status certbot.timer
+sudo certbot certonly --standalone --agree-tos --preferred-challenges http -d domain-name.com   (or)
+
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d example.com -d www.example.com
+sudo ufw status
+sudo ufw allow 'Nginx Full'
